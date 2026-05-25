@@ -1,3 +1,30 @@
+# Passive Skill Tree Export (Community Fork with Patches Overlay)
+
+This is a fork of [grindinggear/skilltree-export](https://github.com/grindinggear/skilltree-export) — GGG's official Path of Exile 1 passive tree data — maintained by community contributors who use it for tooling (PoB MCP, build analyzers, etc.).
+
+## Why this fork exists
+
+GGG's official export occasionally lags real game state. A node's stat line can change in a patch without the export being re-tagged for weeks or months. Tools that consume this data inherit those gaps.
+
+This fork **does not edit `data.json`**. Instead, it adds a companion file, **`data_patches.json`**, containing verified corrections with provenance metadata (who verified, when, against what source). At load time, tools merge `data.json` + `data_patches.json` in memory; on-disk, the upstream export stays pristine so we can pull GGG updates cleanly.
+
+**See [`PATCHES.md`](PATCHES.md) for:**
+- The patch file format and operations (`stats_add`, `stats_replace`, etc.)
+- When to add a patch vs when NOT to (notably: Timeless Jewel transformations are NOT bugs)
+- Upstream merge policy (most recent verification wins)
+- How tools should consume the merged data
+- How to contribute corrections
+
+## Sibling fork
+
+Atlas tree data with the same overlay convention: [charleslucas/poe-atlastree-export](https://github.com/charleslucas/poe-atlastree-export).
+
+## Original GGG content
+
+Everything below this section is GGG's original README documenting the data format. We preserve it verbatim because the format documentation is still authoritative.
+
+---
+
 ## Notice
 
 This repository is for the Passive Skill Tree data. Please visit https://github.com/grindinggear/atlastree-export if you're looking for Atlas Tree data.
