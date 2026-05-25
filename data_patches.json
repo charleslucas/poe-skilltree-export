@@ -1,9 +1,1 @@
-{
-  "11730": {
-    "stats_add": ["0.4% of Attack Damage Leeched as Life"],
-    "verified_from": "in-game tooltip",
-    "verified_date": "2026-05-25",
-    "verified_by": "Memophage#4428",
-    "note": "GGG 3.28.0 export missing this stat on the Endurance notable (Marauder area, +1 max endurance charge). Discovered during MirageSixFingeredMan tree analysis session."
-  }
-}
+{}

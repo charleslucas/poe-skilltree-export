@@ -52,12 +52,23 @@ Add an entry when an in-game discrepancy with `data.json` affects analysis:
 
 - **Visual / positioning differences** (sprites, x/y, orbit) — these don't affect analysis.
 - **Differences attributable to in-game transformations.** Most importantly:
-- **Timeless Jewel modifications.** Timeless Jewels (Lethal Pride, Glorious Vanity, Militant Faith, Brutal Restraint, Elegant Hubris) **replace** stats on small/notable nodes within their radius based on the jewel's seed. A discrepancy on a character with one of these jewels socketed is most likely the jewel doing its job, NOT a stale export.
+- **Timeless Jewel modifications.** Timeless Jewels (Lethal Pride, Glorious Vanity, Militant Faith, Brutal Restraint, Elegant Hubris) **add or replace** stats on small/notable nodes within their radius based on the jewel's seed. A discrepancy on a character with one of these jewels socketed is most likely the jewel doing its job, NOT a stale export.
+
+  **The blank-line convention.** When a passive node tooltip shows stats both above and below a blank line, the lines below the blank line are jewel-added. The lines above are intrinsic to the node. Example: a `+10 to Strength` small node within Lethal Pride radius will show:
+  ```
+  # Strength
+  +10 to Strength      ← intrinsic
+                       ← blank-line separator
+  +2 to Strength       ← Karui addition from the jewel
+  ```
+  Use this convention to read tooltips correctly before deciding what to patch.
+
   - **Checklist before patching:**
     1. Confirm the node is in the user's tree AND they report the discrepancy.
-    2. List any Timeless Jewels socketed in the character. Note their socket location and radius.
-    3. Confirm the node is OUTSIDE every Timeless Jewel's radius. If it's inside, the stats are jewel-transformed — do not patch.
-    4. If outside all jewel radii AND tooltip still differs from `data.json`, proceed with the patch.
+    2. List any Timeless Jewels socketed in the character.
+    3. **Apply the blank-line test**: are the suspected "missing" stats above or below the blank line? If below, they're jewel-added — do not patch.
+    4. **If still uncertain, the controlled-removal test is definitive**: ask the user to copy the node tooltip with the jewel socketed, then unsocket the jewel and copy again. Any lines that disappear were jewel-added. Re-socket the jewel afterward.
+    5. Only proceed with the patch if the stat persists with the jewel unsocketed AND still differs from `data.json`.
 - **Cluster Jewel internal passives** — these are dynamically generated; they're not in `data.json` at all, and they shouldn't be.
 - **Tattoo overrides** — these belong in the build's `<Override>` XML element, not the tree data.
 
