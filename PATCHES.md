@@ -61,13 +61,13 @@ Add an entry when an in-game discrepancy with `data.json` affects analysis:
                        ← blank-line separator
   +2 to Strength       ← Karui addition from the jewel
   ```
-  Use this convention to read tooltips correctly before deciding what to patch.
+  This convention is identical between the in-game passive tree view and the PoB passive tree view. **Use PoB as the copy source** — the game tooltip is read-only (no text selection), while PoB's tooltip text can be copied. The verification protocol below assumes PoB.
 
   - **Checklist before patching:**
     1. Confirm the node is in the user's tree AND they report the discrepancy.
     2. List any Timeless Jewels socketed in the character.
     3. **Apply the blank-line test**: are the suspected "missing" stats above or below the blank line? If below, they're jewel-added — do not patch.
-    4. **If still uncertain, the controlled-removal test is definitive**: ask the user to copy the node tooltip with the jewel socketed, then unsocket the jewel and copy again. Any lines that disappear were jewel-added. Re-socket the jewel afterward.
+    4. **If still uncertain, the controlled-removal test is definitive**: in PoB, hover the node and copy the tooltip text. Then unequip the Timeless Jewel from its socket and copy the tooltip text again. Any lines that disappear in the second copy were jewel-added. Re-equip the jewel afterward to restore the original build state.
     5. Only proceed with the patch if the stat persists with the jewel unsocketed AND still differs from `data.json`.
 - **Cluster Jewel internal passives** — these are dynamically generated; they're not in `data.json` at all, and they shouldn't be.
 - **Tattoo overrides** — these belong in the build's `<Override>` XML element, not the tree data.
